@@ -227,7 +227,7 @@
 					this.rePosDrag();
 					this.fixHeight();
 					this.colresize = false;
-					if ($.cookie) {
+					if ($.cookies) {
 						var name = p.colModel[n].name;		// Store the widths in the cookies
 						$.cookie('flexiwidths/'+name, nw);
 					}
@@ -538,39 +538,28 @@
 				if (p.page > p.pages) {
 					p.page = p.pages;
 				}
-				var param;
-				if ($.isPlainObject(p.params)) {
-					param			= p.params;
-					param.page		= p.newp;
-					param.rp		= p.rp;
-					param.sortname	= p.sortname;
-					param.sortorder	= p.sortorder;
-					param.query		= p.query;
-					param.qtype		= p.qtype;
-				} else {
-					param = [{
-						name: 'page',
-						value: p.newp
-					}, {
-						name: 'rp',
-						value: p.rp
-					}, {
-						name: 'sortname',
-						value: p.sortname
-					}, {
-						name: 'sortorder',
-						value: p.sortorder
-					}, {
-						name: 'query',
-						value: p.query
-					}, {
-						name: 'qtype',
-						value: p.qtype
-					}];
-					if (p.params.length) {
-						for (var pi = 0; pi < p.params.length; pi++) {
-							param[param.length] = p.params[pi];
-						}
+				var param = [{
+					name: 'page',
+					value: p.newp
+				}, {
+					name: 'rp',
+					value: p.rp
+				}, {
+					name: 'sortname',
+					value: p.sortname
+				}, {
+					name: 'sortorder',
+					value: p.sortorder
+				}, {
+					name: 'query',
+					value: p.query
+				}, {
+					name: 'qtype',
+					value: p.qtype
+				}];
+				if (p.params.length) {
+					for (var pi = 0; pi < p.params.length; pi++) {
+						param[param.length] = p.params[pi];
 					}
 				}
 				$.ajax({
@@ -824,7 +813,7 @@
 				var th = document.createElement('th');
 				$(th).attr('axis', 'col' + i);
 				if( cm ) {	// only use cm if its defined
-					if ($.cookie) {
+					if ($.cookies) {
 						var cookie_width = 'flexiwidths/'+cm.name;		// Re-Store the widths in the cookies
 						if( $.cookie(cookie_width) != undefined ) {
 							cm.width = $.cookie(cookie_width);
